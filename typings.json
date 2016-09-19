@@ -1,0 +1,7 @@
+{
+    "name": "stamp_clicker",
+    "dependencies": {},
+    "globalDependencies": {
+        "Kiwi.js": "bower:Kiwi.js/build/kiwi.d.ts"
+    }
+}
