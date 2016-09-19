@@ -21,13 +21,13 @@ gulp.task('connect', () => {
     });
 });
 
-gulp.task('reload', ()=>{
-  gulp.src('./dist/**/*.*')
-  .pipe($.connect.reload());
+gulp.task('reload', () => {
+    gulp.src('./dist/**/*.*')
+        .pipe($.connect.reload());
 });
 
 gulp.task('watch', () => {
-    gulp.watch([config.SRC + '/**/*.*'], ['pre','reload']);
+    gulp.watch([config.SRC + '/**/*.*'], ['pre', 'reload']);
 });
 
 gulp.task('pre', ['ts:compile', 'asserts:copy', 'html:copy'], () => {

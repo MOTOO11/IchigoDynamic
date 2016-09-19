@@ -3,11 +3,17 @@
 
 class BaseState extends Phaser.State {}
 
-class Main extends BaseState{
+class Main extends BaseState {
 
-  public create(){
+  public preload() {
+
+  }
+  public create() {
     super.create();
-    this.game.stage.backgroundColor="#666";
+    this.game.stage.backgroundColor = "#666";
+  }
+  public update() {
+
   }
 }
 
@@ -18,7 +24,7 @@ class Application {
     this.game = new Phaser.Game(width, height, Phaser.AUTO, targetId, null, false);
     this.game.state.add("main", Main, false);
     //  this.game.state.add("main", main.MainState, false);
-      this.game.state.start("main");
+    this.game.state.start("main");
   }
 }
 
