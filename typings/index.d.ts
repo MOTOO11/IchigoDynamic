@@ -1,1 +1,1 @@
-/// <reference path="globals/Kiwi.js/index.d.ts" />
+/// <reference path="globals/phaser/index.d.ts" />

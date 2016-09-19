@@ -6,7 +6,7 @@ const $ = gulpLoadPlugins();
 import postprocessors from './postcss-config';
 
 gulp.task("compile:postcss", function() {
-    return gulp.src(config.src.postcss)
+    gulp.src(config.src.postcss)
         .pipe($.plumber())
         .pipe($.cssnext({
             compress: false,

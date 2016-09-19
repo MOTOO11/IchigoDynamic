@@ -1,84 +1,28 @@
 /// <reference path="../../typings/index.d.ts" />
 "use strict";
 
-class BaseState extends Kiwi.State {
-  timeText: Kiwi.GameObjects.TextField;
-  public constructor(value: string) {
-    super(value);
-  }
-  public update() {
-    super.update();
-    this.timeText.text = "Time: " + this.game.time.delta();
+class BaseState extends Phaser.State {}
 
-  }
-  public create() {
+class Main extends BaseState{
+
+  public create(){
     super.create();
-    this.timeText = new Kiwi.GameObjects.TextField(this, "text", 10, 10, "#000", 16, "normal");
-    this.addChild(this.timeText);
-    console.log(this.timeText);
+    this.game.stage.backgroundColor="#666";
   }
 }
 
-class Home extends BaseState {
-
-  private logo: Kiwi.GameObjects.StaticImage
-
-  public constructor() {
-    super("home")
-  }
-
-  public preload() {
-    super.preload()
-    this.addImage("logo", "asserts/images/kiwilogo.png")
-  }
-
-  public create() {
-    super.create()
-    this.logo = new Kiwi.GameObjects.StaticImage(this, this.textures["logo"], 100, 100)
-    this.addChild(this.logo)
-  }
-
-  public update() {
-    super.update()
+class Application {
+  "use strict";
+  game: Phaser.Game;
+  constructor(width: number, height: number, targetId: string) {
+    this.game = new Phaser.Game(width, height, Phaser.AUTO, targetId, null, false);
+    this.game.state.add("main", Main, false);
+    //  this.game.state.add("main", main.MainState, false);
+      this.game.state.start("main");
   }
 }
 
-class Roulette extends BaseState {
-  constructor() {
-    super("ガチャ");
-  }
-
-}
-
-
-class CardViewer extends BaseState {
-
-}
-
-
-class Card extends BaseState {
-
-}
-
-
-class Result extends BaseState {
-
-}
-
-
-
-var game = new Kiwi.Game(null, "Hello World", null, {
-  renderer: Kiwi.RENDERER_CANVAS,
-  width: 400,
-  height: 700
-});
-game.states.addState(new Home(), true);
-//game.states.switchState
-
-
-// class Application {
-//   "use strict";
-//   constructor() {
-//     console.log("ee");
-//   }
-// }
+window.onload = () => {
+  var main: Application = new Application(640, 480, "canvas");
+  console.log("This id is '" + main.game.id + "'!");
+};

@@ -1,7 +1,7 @@
 {
     "name": "stamp_clicker",
     "dependencies": {},
-    "globalDependencies": {
-        "Kiwi.js": "bower:Kiwi.js/build/kiwi.d.ts"
+    "globalDevDependencies": {
+        "phaser": "github:photonstorm/phaser/typescript/typings.json"
     }
 }

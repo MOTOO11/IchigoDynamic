@@ -15,7 +15,7 @@ export const css = {
     }
 }
 export const scripts = {
-    dest: {
+    dist: {
         name: {
             vendor: `vendor.min.js`,
             my: `app.js`,
