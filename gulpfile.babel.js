@@ -1,6 +1,8 @@
 'use strict'
 import gulp from 'gulp'
-import { DIR as config } from './gulp-config';
+import {
+    DIR as config
+} from './gulp-config';
 import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 import requireDir from 'require-dir'
@@ -21,15 +23,15 @@ gulp.task('connect', () => {
     });
 });
 
-gulp.task('reload', () => {
-    gulp.src('./dist/**/*.*')
-        .pipe($.connect.reload());
+gulp.task("ts:compile", ["typescript:compile"], () => {
+    gulp.src('./dist/**/*.*').pipe(
+        $.connect.reload());
 });
 
 gulp.task('watch', () => {
-    gulp.watch([config.SRC + '/**/*.*'], ['pre', 'reload']);
+    gulp.watch([config.SRC + '/**/*.*'], ['pre']);
 });
 
-gulp.task('pre', ['ts:compile', 'asserts:copy', 'html:copy'], () => {
+gulp.task('pre', ['ts:compile', 'assets:copy', 'html:copy'], () => {
 
 })

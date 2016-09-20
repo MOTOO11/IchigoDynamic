@@ -5,7 +5,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 
 // define tasks here
-gulp.task('ts:compile', () => {
+gulp.task('typescript:compile', () => {
     gulp.src(config.src.typescript)
         .pipe($.typescript({
             target: 'ES5',
