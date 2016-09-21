@@ -24,7 +24,7 @@ gulp.task('connect', () => {
 });
 
 gulp.task("ts:compile", ["typescript:compile"], () => {
-    gulp.src('./dist/**/*.*').pipe(
+    gulp.src(config.SRC+"/**/*.*").pipe(
         $.connect.reload());
 });
 

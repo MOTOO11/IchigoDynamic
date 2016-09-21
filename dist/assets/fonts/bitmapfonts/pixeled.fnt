@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<font>
+  <info face="Pixeled" size="128" bold="0" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="1" padding="0,0,0,0" spacing="1,1" outline="0"/>
+  <common lineHeight="128" base="102" scaleW="512" scaleH="512" pages="1" packed="0" alphaChnl="1" redChnl="0" greenChnl="0" blueChnl="0"/>
+  <pages>
+    <page id="0" file="pixeled_0.png" />
+  </pages>
+  <chars count="15">
+    <char id="33" x="489" y="0" width="13" height="77" xoffset="0" yoffset="25" xadvance="26" page="0" chnl="15" />
+    <char id="45" x="107" y="78" width="39" height="14" xoffset="0" yoffset="50" xadvance="51" page="0" chnl="15" />
+    <char id="46" x="147" y="78" width="13" height="13" xoffset="0" yoffset="89" xadvance="26" page="0" chnl="15" />
+    <char id="48" x="65" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="49" x="53" y="78" width="13" height="77" xoffset="0" yoffset="25" xadvance="26" page="0" chnl="15" />
+    <char id="50" x="118" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="51" x="171" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="52" x="224" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="53" x="277" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="54" x="330" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="55" x="383" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="56" x="436" y="0" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="57" x="0" y="78" width="52" height="77" xoffset="0" yoffset="25" xadvance="64" page="0" chnl="15" />
+    <char id="61" x="67" y="78" width="39" height="39" xoffset="0" yoffset="38" xadvance="51" page="0" chnl="15" />
+    <char id="63" x="0" y="0" width="64" height="77" xoffset="0" yoffset="25" xadvance="77" page="0" chnl="15" />
+  </chars>
+</font>
