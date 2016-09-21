@@ -32,12 +32,19 @@ module ImageName {
   export var SHADOW = "shadow";
 }
 
+module SoundName {
+  export var CHOP = "chop";
+}
+
+
 class Main extends BaseState {
   ichigo: Phaser.Sprite;
   shadow: Phaser.Sprite;
   LOG: Phaser.Sprite;
   count: number = 0;
   counter: Phaser.BitmapText;
+  chopSound: Phaser.Sound;
+
   public preload() {
     super.preload();
     this.game.load.spritesheet(SpriteSheetName.ICHOGO,
@@ -45,6 +52,7 @@ class Main extends BaseState {
     this.game.load.image(ImageName.BG_FOREST, "assets/images/background_forest.png");
     this.game.load.image(ImageName.SHADOW, "assets/images/shadow.png");
     this.game.load.spritesheet(SpriteSheetName.LOG, "assets/images/薪単品sprite.png", 112, 64);
+    this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
   }
 
   public getPaddingCount() {
@@ -61,7 +69,7 @@ class Main extends BaseState {
     var LOG = this.game.add.sprite(0, 130, SpriteSheetName.LOG);
     LOG.x = (this.game.width - LOG.width) / 2 - 25;
 
-    LOG.animations.add(AnimationsName.BROKEN, [0,0,0,0,0, 1, 2, 3, 4, 5], 40, false)
+    LOG.animations.add(AnimationsName.BROKEN, [0, 0, 0, 0, 0, 1, 2, 3, 4, 5], 40, false)
       .onComplete.add(() => {
         LOG.destroy();
       });
@@ -70,7 +78,11 @@ class Main extends BaseState {
 
   public create() {
     super.create();
+ 
+    this.chopSound = this.game.add.audio(SoundName.CHOP,0.25, false);
+        
     this.game.add.image(0, 0, ImageName.BG_FOREST);
+
     this.counter = this.createCounter();
     this.game.stage.disableVisibilityChange = true;
 
@@ -96,6 +108,7 @@ class Main extends BaseState {
       if (this.LOG.animations.currentAnim.isPlaying) {
         this.LOG.animations.currentAnim.complete();
       }
+        this.chopSound.play();
       this.LOG.play(AnimationsName.BROKEN);
 
     });
@@ -117,5 +130,5 @@ class Application {
   }
 }
 
-var main: Application = new Application(400, 200,"canvas");
+var main: Application = new Application(400, 200, "canvas");
 console.log("This id is '" + main.game.id + "'!");

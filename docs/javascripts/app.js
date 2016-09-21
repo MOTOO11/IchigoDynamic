@@ -38,6 +38,10 @@ var ImageName;
     ImageName.BG_FOREST = "background:forest";
     ImageName.SHADOW = "shadow";
 })(ImageName || (ImageName = {}));
+var SoundName;
+(function (SoundName) {
+    SoundName.CHOP = "chop";
+})(SoundName || (SoundName = {}));
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
@@ -50,6 +54,7 @@ var Main = (function (_super) {
         this.game.load.image(ImageName.BG_FOREST, "assets/images/background_forest.png");
         this.game.load.image(ImageName.SHADOW, "assets/images/shadow.png");
         this.game.load.spritesheet(SpriteSheetName.LOG, "assets/images/薪単品sprite.png", 112, 64);
+        this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
     };
     Main.prototype.getPaddingCount = function () {
         return this.pad(this.count + "", 19, "") + "";
@@ -71,6 +76,7 @@ var Main = (function (_super) {
     Main.prototype.create = function () {
         var _this = this;
         _super.prototype.create.call(this);
+        this.chopSound = this.game.add.audio(SoundName.CHOP, 0.25, false);
         this.game.add.image(0, 0, ImageName.BG_FOREST);
         this.counter = this.createCounter();
         this.game.stage.disableVisibilityChange = true;
@@ -95,6 +101,7 @@ var Main = (function (_super) {
             if (_this.LOG.animations.currentAnim.isPlaying) {
                 _this.LOG.animations.currentAnim.complete();
             }
+            _this.chopSound.play();
             _this.LOG.play(AnimationsName.BROKEN);
         });
         this.ichigo.animations.play(AnimationsName.STANDBY);
