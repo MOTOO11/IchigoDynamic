@@ -60,13 +60,11 @@ var Main = (function (_super) {
         return counter;
     };
     Main.prototype.createLOG = function () {
-        var _this = this;
         var LOG = this.game.add.sprite(0, 130, SpriteSheetName.LOG);
         LOG.x = (this.game.width - LOG.width) / 2 - 25;
         LOG.animations.add(AnimationsName.BROKEN, [0, 0, 0, 0, 0, 1, 2, 3, 4, 5], 40, false)
             .onComplete.add(function () {
             LOG.destroy();
-            _this.LOG = _this.createLOG();
         });
         return LOG;
     };
@@ -83,6 +81,7 @@ var Main = (function (_super) {
         this.ichigo.animations.add(AnimationsName.STANDBY, [0, 1, 2, 1], 3, true);
         this.ichigo.animations.add(AnimationsName.CHOP, [3, 4, 5, 6, 7, 8, 9, 10, 11], 35, false).onComplete.add(function () {
             _this.ichigo.animations.play(AnimationsName.STANDBY);
+            _this.LOG = _this.createLOG();
         });
         ;
         this.game.input.onDown.add(function () {

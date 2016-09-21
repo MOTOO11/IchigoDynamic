@@ -64,7 +64,6 @@ class Main extends BaseState {
     LOG.animations.add(AnimationsName.BROKEN, [0,0,0,0,0, 1, 2, 3, 4, 5], 40, false)
       .onComplete.add(() => {
         LOG.destroy();
-      this.LOG = this.createLOG();
       });
     return LOG;
   }
@@ -84,6 +83,7 @@ class Main extends BaseState {
 
     this.ichigo.animations.add(AnimationsName.CHOP, [3, 4, 5, 6, 7, 8, 9, 10, 11], 35, false).onComplete.add(() => {
       this.ichigo.animations.play(AnimationsName.STANDBY);
+      this.LOG = this.createLOG();
     });;
     this.game.input.onDown.add(() => {
       if (this.ichigo.animations.currentAnim.name == AnimationsName.CHOP) {

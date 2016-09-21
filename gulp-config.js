@@ -1,5 +1,5 @@
 export const DIR = {
-    DIST: 'dist',
+    DIST: 'docs',
     SRC: 'src'
 }
 export const css = {

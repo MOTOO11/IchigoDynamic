@@ -1,5 +1,7 @@
 import gulp from 'gulp'
-import config from '../gulp-config';
+import {
+    DIR as config
+} from '../gulp-config';
 import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 var del = require('del');
@@ -19,13 +21,13 @@ var vendor_js = () => {
         .pipe($.plumber())
         .pipe($.concat('vendor.js'))
         //.pipe(gulp.dest(config.dist.dir))
-        .pipe(gulp.dest('dist/javascripts'))
+        .pipe(gulp.dest(config.DIST + "/javascripts"))
         .pipe($.rename('vendor.min.js'))
         .pipe($.uglify({
             preserveComments: 'all'
         }))
         // .pipe(gulp.dest(js.dist.vendor.js));
-        .pipe(gulp.dest('dist/javascripts'));
+        .pipe(gulp.dest(config.DIST + "/javascripts"));
 };
 
 // var vendor_css = function() {

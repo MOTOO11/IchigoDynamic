@@ -24,7 +24,7 @@ gulp.task('connect', () => {
 });
 
 gulp.task("ts:compile", ["typescript:compile"], () => {
-    gulp.src(config.SRC+"/**/*.*").pipe(
+    gulp.src(config.SRC + "/**/*.*").pipe(
         $.connect.reload());
 });
 
@@ -34,4 +34,9 @@ gulp.task('watch', () => {
 
 gulp.task('pre', ['ts:compile', 'assets:copy', 'html:copy'], () => {
 
-})
+});
+
+gulp.task('deploy', ()=> {
+  gulp.src('./dist/**/*')
+    .pipe($.ghPages());
+});
