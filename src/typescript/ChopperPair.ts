@@ -70,11 +70,11 @@ class ChopperPair extends BaseState {
         });
 
         bg.events.onInputDown.add((p: Phaser.Pointer) => {
-            if (this.ichigo.animations.currentAnim.name == AnimationsName.CHOP) {
-                this.ichigo.animations.currentAnim.complete();
+            if (this.currentChopper.animations.currentAnim.name == AnimationsName.CHOP) {
+                this.currentChopper.animations.currentAnim.complete();
             }
-            if (this.akari.animations.currentAnim.name == AnimationsName.CHOP) {
-                this.akari.animations.currentAnim.complete();
+            if (this.currentChopper.animations.currentAnim.name == AnimationsName.CHOP) {
+                this.currentChopper.animations.currentAnim.complete();
             }
             if (p.game.input.activePointer.leftButton.isDown) {
                 this.ichigo.animations.play(AnimationsName.CHOP);

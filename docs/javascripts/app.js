@@ -203,11 +203,11 @@ var ChopperPair = (function (_super) {
             _this.LOG = _this.createLOG();
         });
         bg.events.onInputDown.add(function (p) {
-            if (_this.ichigo.animations.currentAnim.name == AnimationsName.CHOP) {
-                _this.ichigo.animations.currentAnim.complete();
+            if (_this.currentChopper.animations.currentAnim.name == AnimationsName.CHOP) {
+                _this.currentChopper.animations.currentAnim.complete();
             }
-            if (_this.akari.animations.currentAnim.name == AnimationsName.CHOP) {
-                _this.akari.animations.currentAnim.complete();
+            if (_this.currentChopper.animations.currentAnim.name == AnimationsName.CHOP) {
+                _this.currentChopper.animations.currentAnim.complete();
             }
             if (p.game.input.activePointer.leftButton.isDown) {
                 _this.ichigo.animations.play(AnimationsName.CHOP);
