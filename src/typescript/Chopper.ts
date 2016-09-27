@@ -14,17 +14,16 @@ class Chopper extends BaseState {
         super.preload();
     }
 
-    public getPaddingCount() {
-        return this.pad(this.count + "", 19, "") + "";
+    public getPaddingCount(): string {
+        return this.pad(this.count + "", 19, "");
     }
-
     public createLOG() {
-        var logY: number = 130
-        var LOG = this.game.add.sprite(0, 0, SpriteSheetName.LOG);
-        LOG.x = (this.game.width - LOG.width) / 2 - 25;
+        var logY: number = 130;
+        var LOG = this.game.add.sprite(0, logY, SpriteSheetName.LOG);
+        LOG.x = (this.game.width - LOG.width) / 2 + 10;
         var t: Phaser.Tween =
-            this.game.add.tween(LOG).to({
-                y: logY
+            this.game.add.tween(LOG).from({
+                y: 0
             }, 80, null, false, 0, 0, false);
         LOG.animations.add(AnimationsName.BROKEN, [0, 0, 0, 0, 0, 1, 2, 3, 4, 5], 40, false)
             .onComplete.add(() => {
@@ -42,10 +41,11 @@ class Chopper extends BaseState {
         this.counter = this.game.add.bitmapText(13, 10, "Pixeled", this.getPaddingCount(), 40); //37
 
         this.shadow = this.game.add.sprite(0, 130, ImageName.SHADOW);
-        this.shadow.x = (this.game.width - this.shadow.width) / 2;
+        this.shadow.x = (this.game.width - this.shadow.width) / 2 - 47;
 
         this.ichigo = this.game.add.sprite(0, 60, SpriteSheetName.ICHOGO);
-        this.ichigo.x = (this.game.width - this.ichigo.width) / 2 - 20;
+        this.ichigo.scale.setTo(-1, 1);
+        this.ichigo.x = (this.game.width - this.ichigo.width) / 2 - 25;
         this.ichigo.animations.add(AnimationsName.STANDBY, [0, 1, 2, 1], 3, true);
         this.ichigo.animations.add(AnimationsName.CHOP, [3, 4, 5, 6, 7, 8, 9, 10, 11], 35, false).onComplete.add(() => {
             this.ichigo.animations.play(AnimationsName.STANDBY);
@@ -67,6 +67,15 @@ class Chopper extends BaseState {
         this.ichigo.animations.play(AnimationsName.STANDBY);
         this.LOG = this.createLOG();
         super.create();
+        this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.addOnce(() => {
+            // this.game.state.remove(State.CHOPPER);
+            //  this.game.state.add(State.CHOPPER, Chopper, false);
+            this.game.state.start(State.CHOPPER, true, false);
+        });
+        this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.addOnce(() => {
+            // this.game.state.remove(State.CHOPPER_PAIR);
+            // this.game.state.add(State.CHOPPER_PAIR, ChopperPair, false);
+            this.game.state.start(State.CHOPPER_PAIR, true, false);
+        });
     }
-    public update() {}
 }

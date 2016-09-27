@@ -38,6 +38,7 @@ var BaseState = (function (_super) {
     BaseState.prototype.preload = function () {
     };
     BaseState.prototype.create = function () {
+        _super.prototype.create.call(this);
         this.game.stage.backgroundColor = "#eee";
         document.body.oncontextmenu = function () {
             return false;
@@ -62,14 +63,14 @@ var Chopper = (function (_super) {
         _super.prototype.preload.call(this);
     };
     Chopper.prototype.getPaddingCount = function () {
-        return this.pad(this.count + "", 19, "") + "";
+        return this.pad(this.count + "", 19, "");
     };
     Chopper.prototype.createLOG = function () {
         var logY = 130;
-        var LOG = this.game.add.sprite(0, 0, SpriteSheetName.LOG);
-        LOG.x = (this.game.width - LOG.width) / 2 - 25;
-        var t = this.game.add.tween(LOG).to({
-            y: logY
+        var LOG = this.game.add.sprite(0, logY, SpriteSheetName.LOG);
+        LOG.x = (this.game.width - LOG.width) / 2 + 10;
+        var t = this.game.add.tween(LOG).from({
+            y: 0
         }, 80, null, false, 0, 0, false);
         LOG.animations.add(AnimationsName.BROKEN, [0, 0, 0, 0, 0, 1, 2, 3, 4, 5], 40, false)
             .onComplete.add(function () {
@@ -84,9 +85,10 @@ var Chopper = (function (_super) {
         this.game.add.image(0, 0, ImageName.BG_FOREST);
         this.counter = this.game.add.bitmapText(13, 10, "Pixeled", this.getPaddingCount(), 40);
         this.shadow = this.game.add.sprite(0, 130, ImageName.SHADOW);
-        this.shadow.x = (this.game.width - this.shadow.width) / 2;
+        this.shadow.x = (this.game.width - this.shadow.width) / 2 - 47;
         this.ichigo = this.game.add.sprite(0, 60, SpriteSheetName.ICHOGO);
-        this.ichigo.x = (this.game.width - this.ichigo.width) / 2 - 20;
+        this.ichigo.scale.setTo(-1, 1);
+        this.ichigo.x = (this.game.width - this.ichigo.width) / 2 - 25;
         this.ichigo.animations.add(AnimationsName.STANDBY, [0, 1, 2, 1], 3, true);
         this.ichigo.animations.add(AnimationsName.CHOP, [3, 4, 5, 6, 7, 8, 9, 10, 11], 35, false).onComplete.add(function () {
             _this.ichigo.animations.play(AnimationsName.STANDBY);
@@ -109,8 +111,13 @@ var Chopper = (function (_super) {
         this.ichigo.animations.play(AnimationsName.STANDBY);
         this.LOG = this.createLOG();
         _super.prototype.create.call(this);
+        this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.addOnce(function () {
+            _this.game.state.start(State.CHOPPER, true, false);
+        });
+        this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.addOnce(function () {
+            _this.game.state.start(State.CHOPPER_PAIR, true, false);
+        });
     };
-    Chopper.prototype.update = function () { };
     return Chopper;
 }(BaseState));
 "use strict";
@@ -129,7 +136,7 @@ var Boot = (function (_super) {
         this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
     };
     Boot.prototype.create = function () {
-        this.game.state.start(State.CHOPPER, true, false);
+        this.game.state.start(State.CHOPPER_PAIR, true, false);
     };
     return Boot;
 }(Phaser.State));
@@ -143,49 +150,44 @@ var ChopperPair = (function (_super) {
         _super.prototype.preload.call(this);
     };
     ChopperPair.prototype.getPaddingCount = function () {
-        return this.pad(this.count + "", 19, "") + "";
-    };
-    ChopperPair.prototype.createCounter = function () {
-        var counter = this.game.add.bitmapText(13, 10, "Pixeled", this.getPaddingCount(), 40);
-        counter.tint = 0x111;
-        return counter;
+        return this.pad(this.count + "", 19, "");
     };
     ChopperPair.prototype.createLOG = function () {
-        var LOG = this.game.add.sprite(0, 130, SpriteSheetName.LOG);
-        LOG.x = (this.game.width - LOG.width) / 2 - 25;
+        var logY = 130;
+        var LOG = this.game.add.sprite(0, logY, SpriteSheetName.LOG);
+        LOG.x = (this.game.width - LOG.width) / 2 + 10;
+        var t = this.game.add.tween(LOG).from({
+            y: 0
+        }, 80, null, false, 0, 0, false);
         LOG.animations.add(AnimationsName.BROKEN, [0, 0, 0, 0, 0, 1, 2, 3, 4, 5], 40, false)
             .onComplete.add(function () {
             LOG.destroy();
         });
+        t.start();
         return LOG;
     };
     ChopperPair.prototype.create = function () {
         var _this = this;
-        _super.prototype.create.call(this);
         this.chopSound = this.game.add.audio(SoundName.CHOP, 0.25, false);
         this.game.add.image(0, 0, ImageName.BG_FOREST);
-        this.counter = this.createCounter();
-        this.game.stage.disableVisibilityChange = true;
+        this.counter = this.game.add.bitmapText(13, 10, "Pixeled", this.getPaddingCount(), 40);
         this.shadowIchigo = this.game.add.sprite(0, 130, ImageName.SHADOW);
-        this.shadowIchigo.x = (this.game.width - this.shadowIchigo.width) / 2;
+        this.shadowIchigo.x = (this.game.width - this.shadowIchigo.width) / 2 - 47;
         this.ichigo = this.game.add.sprite(0, 60, SpriteSheetName.ICHOGO);
-        this.ichigo.x = (this.game.width - this.ichigo.width) / 2 - 20;
+        this.ichigo.scale.setTo(-1, 1);
+        this.ichigo.x = (this.game.width - this.ichigo.width) / 2 - 25;
         this.ichigo.animations.add(AnimationsName.STANDBY, [0, 1, 2, 1], 3, true);
-        console.log(this.ichigo.x);
-        console.log(this.shadowIchigo.x);
         this.ichigo.animations.add(AnimationsName.CHOP, [3, 4, 5, 6, 7, 8, 9, 10, 11], 35, false).onComplete.add(function () {
             _this.ichigo.animations.play(AnimationsName.STANDBY);
             _this.LOG = _this.createLOG();
         });
-        ;
-        this.game.input.onDown.add(function () {
+        this.game.input.mousePointer.leftButton.onDown.add(function () {
             if (_this.ichigo.animations.currentAnim.name == AnimationsName.CHOP) {
                 _this.ichigo.animations.currentAnim.complete();
             }
             _this.ichigo.animations.play(AnimationsName.CHOP);
             _this.count++;
-            _this.counter.destroy();
-            _this.counter = _this.createCounter();
+            _this.counter.setText(_this.getPaddingCount());
             if (_this.LOG.animations.currentAnim.isPlaying) {
                 _this.LOG.animations.currentAnim.complete();
             }
@@ -194,9 +196,13 @@ var ChopperPair = (function (_super) {
         });
         this.ichigo.animations.play(AnimationsName.STANDBY);
         this.LOG = this.createLOG();
-    };
-    ChopperPair.prototype.update = function () {
-        this.counter.setText(this.getPaddingCount());
+        _super.prototype.create.call(this);
+        this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.addOnce(function () {
+            _this.game.state.start(State.CHOPPER, true, false);
+        });
+        this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.addOnce(function () {
+            _this.game.state.start(State.CHOPPER_PAIR, true, false);
+        });
     };
     return ChopperPair;
 }(BaseState));
@@ -204,6 +210,7 @@ var Application = (function () {
     function Application(width, height, targetId) {
         this.game = new Phaser.Game(width, height, Phaser.AUTO, targetId, null, false);
         this.game.state.add(State.CHOPPER, Chopper, false);
+        this.game.state.add(State.CHOPPER_PAIR, ChopperPair, false);
         this.game.state.add(State.BOOT, Boot, false);
         this.game.state.start(State.BOOT);
     }

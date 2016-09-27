@@ -3,6 +3,7 @@
 /// <reference path="./Const.ts"/>
 /// <reference path="./Boot.ts"/>
 /// <reference path="./Chopper.ts"/>
+/// <reference path="./ChopperPair.ts"/>
 
 class Application {
   "use strict";
@@ -10,6 +11,7 @@ class Application {
   constructor(width: number, height: number, targetId: string) {
     this.game = new Phaser.Game(width, height, Phaser.AUTO, targetId, null, false);
     this.game.state.add(State.CHOPPER, Chopper, false);
+    this.game.state.add(State.CHOPPER_PAIR, ChopperPair, false);
     this.game.state.add(State.BOOT, Boot, false);
     this.game.state.start(State.BOOT);
     //  this.game.scale.setGameSize(600,400);

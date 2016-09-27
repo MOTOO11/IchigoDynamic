@@ -7,12 +7,13 @@ class BaseState extends Phaser.State {
     }
 
     public create() {
+        super.create();
         this.game.stage.backgroundColor = "#eee";
         document.body.oncontextmenu = function() {
             return false;
         };
         this.game.stage.disableVisibilityChange = true;
-        this.game.add.bitmapText(250, 180, "Pixeled", "- " + this.game.state.current + " -", 20); //37
+        this.game.add.bitmapText(250, 180, "Pixeled", "- " + this.game.state.current + " -", 20);
     }
     public pad(n: string, width: number, z: string) {
         z = z || '0';
