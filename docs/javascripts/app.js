@@ -35,8 +35,7 @@ var BaseState = (function (_super) {
     function BaseState() {
         _super.apply(this, arguments);
     }
-    BaseState.prototype.preload = function () {
-    };
+    BaseState.prototype.preload = function () { };
     BaseState.prototype.create = function () {
         _super.prototype.create.call(this);
         this.game.stage.backgroundColor = "#eee";
@@ -61,6 +60,13 @@ var Chopper = (function (_super) {
     }
     Chopper.prototype.preload = function () {
         _super.prototype.preload.call(this);
+        this.game.load.bitmapFont("Pixeled", "assets/fonts/bitmapfonts/pixeled_0.png", "assets/fonts/bitmapfonts/pixeled.fnt");
+        this.game.load.spritesheet(SpriteSheetName.ICHOGO, "assets/images/いちごちゃんsprite.png", 128, 128);
+        this.game.load.spritesheet(SpriteSheetName.AKARI, "assets/images/あかりちゃんsprite.png", 128, 128);
+        this.game.load.image(ImageName.BG_FOREST, "assets/images/background_forest.png");
+        this.game.load.image(ImageName.SHADOW, "assets/images/shadow.png");
+        this.game.load.spritesheet(SpriteSheetName.LOG, "assets/images/薪単品sprite.png", 112, 64);
+        this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
     };
     Chopper.prototype.getPaddingCount = function () {
         return this.pad(this.count + "", 19, "");
@@ -136,7 +142,7 @@ var Boot = (function (_super) {
         this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
     };
     Boot.prototype.create = function () {
-        this.game.state.start(State.CHOPPER_PAIR, true, false);
+        this.game.state.start(State.CHOPPER, true, false);
     };
     return Boot;
 }(Phaser.State));
@@ -148,6 +154,13 @@ var ChopperPair = (function (_super) {
     }
     ChopperPair.prototype.preload = function () {
         _super.prototype.preload.call(this);
+        this.game.load.bitmapFont("Pixeled", "assets/fonts/bitmapfonts/pixeled_0.png", "assets/fonts/bitmapfonts/pixeled.fnt");
+        this.game.load.spritesheet(SpriteSheetName.ICHOGO, "assets/images/いちごちゃんsprite.png", 128, 128);
+        this.game.load.spritesheet(SpriteSheetName.AKARI, "assets/images/あかりちゃんsprite.png", 128, 128);
+        this.game.load.image(ImageName.BG_FOREST, "assets/images/background_forest.png");
+        this.game.load.image(ImageName.SHADOW, "assets/images/shadow.png");
+        this.game.load.spritesheet(SpriteSheetName.LOG, "assets/images/薪単品sprite.png", 112, 64);
+        this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
     };
     ChopperPair.prototype.getPaddingCount = function () {
         return this.pad(this.count + "", 19, "");

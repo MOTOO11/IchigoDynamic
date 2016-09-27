@@ -2,14 +2,12 @@
 /// <reference path="./Const.ts"/>
 
 class BaseState extends Phaser.State {
-    public preload() {
-
-    }
+    public preload() {}
 
     public create() {
         super.create();
         this.game.stage.backgroundColor = "#eee";
-        document.body.oncontextmenu = function() {
+        document.body.oncontextmenu = function () {
             return false;
         };
         this.game.stage.disableVisibilityChange = true;

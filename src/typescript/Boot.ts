@@ -18,6 +18,6 @@ class Boot extends Phaser.State {
     }
 
     public create() {
-        this.game.state.start(State.CHOPPER_PAIR,true,false);
+        this.game.state.start(State.CHOPPER,true,false);
     }
 }
