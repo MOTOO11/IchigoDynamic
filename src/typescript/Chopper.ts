@@ -12,16 +12,6 @@ class Chopper extends BaseState {
 
     public preload() {
         super.preload();
-        this.game.load.bitmapFont(
-            "Pixeled", "assets/fonts/bitmapfonts/pixeled_0.png", "assets/fonts/bitmapfonts/pixeled.fnt");
-        this.game.load.spritesheet(SpriteSheetName.ICHOGO,
-            "assets/images/いちごちゃんsprite.png", 128, 128);
-        this.game.load.spritesheet(SpriteSheetName.AKARI,
-            "assets/images/あかりちゃんsprite.png", 128, 128);
-        this.game.load.image(ImageName.BG_FOREST, "assets/images/background_forest.png");
-        this.game.load.image(ImageName.SHADOW, "assets/images/shadow.png");
-        this.game.load.spritesheet(SpriteSheetName.LOG, "assets/images/薪単品sprite.png", 112, 64);
-        this.game.load.audio(SoundName.CHOP, "assets/sounds/kick-low1.mp3");
     }
 
     public getPaddingCount(): string {
@@ -46,7 +36,9 @@ class Chopper extends BaseState {
     public create() {
         this.chopSound = this.game.add.audio(SoundName.CHOP, 0.25, false);
 
-        this.game.add.image(0, 0, ImageName.BG_FOREST);
+        var bg = this.game.add.image(0, 0, ImageName.BG_FOREST);
+        bg.inputEnabled = true;
+        bg.input.useHandCursor = true;
 
         this.counter = this.game.add.bitmapText(13, 10, "Pixeled", this.getPaddingCount(), 40); //37
 
@@ -60,8 +52,10 @@ class Chopper extends BaseState {
         this.ichigo.animations.add(AnimationsName.CHOP, [3, 4, 5, 6, 7, 8, 9, 10, 11], 35, false).onComplete.add(() => {
             this.ichigo.animations.play(AnimationsName.STANDBY);
             this.LOG = this.createLOG();
-        });;
-        this.game.input.mousePointer.leftButton.onDown.add(() => {
+        });
+
+        bg.events.onInputDown.add((p: Phaser.Pointer) => {
+            if (!p.game.input.activePointer.leftButton.isDown) return;
             if (this.ichigo.animations.currentAnim.name == AnimationsName.CHOP) {
                 this.ichigo.animations.currentAnim.complete();
             }
