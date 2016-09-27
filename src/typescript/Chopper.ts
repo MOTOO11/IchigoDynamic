@@ -13,7 +13,9 @@ class Chopper extends BaseState {
     public preload() {
         super.preload();
     }
-
+    public init(count: number) {
+        this.count = count;
+    }
     public getPaddingCount(): string {
         return this.pad(this.count + "", 19, "");
     }
@@ -72,10 +74,10 @@ class Chopper extends BaseState {
         this.LOG = this.createLOG();
         super.create();
         this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.addOnce(() => {
-            this.game.state.start(State.CHOPPER, true, false);
+            this.game.state.start(State.CHOPPER_PAIR_SOUNDS, true, false, this.count);
         });
         this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.addOnce(() => {
-            this.game.state.start(State.CHOPPER_PAIR, true, false);
+            this.game.state.start(State.CHOPPER_PAIR, true, false, this.count);
         });
     }
 }

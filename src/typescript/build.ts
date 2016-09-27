@@ -5,5 +5,6 @@
 /// <reference path="./Boot.ts"/>
 /// <reference path="./Chopper.ts"/>
 /// <reference path="./ChopperPair.ts"/>
+/// <reference path="./ChopperPairSounds.ts"/>
 /// <reference path="./Base.ts"/>
 /// <reference path="./Application.ts"/>

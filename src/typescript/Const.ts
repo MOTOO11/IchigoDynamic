@@ -15,12 +15,16 @@ module ImageName {
 }
 
 module SoundName {
-  export const  CHOP = "chop";
+  export const CHOP = "chop";
+  export const CHOP_1 = "chop_1";
+  export const CHOP_2 = "chop_2";
+
 }
 
-type State = "chopper:solo" | "chopper:pair" | "boot";
-namespace State{
-    export const CHOPPER:State = "chopper:solo"
-    export const BOOT:State = "boot"
-    export const CHOPPER_PAIR:State = "chopper:pair"
+type State = "chopper:pair:s" | "chopper:solo" | "chopper:pair" | "boot";
+namespace State {
+  export const CHOPPER: State = "chopper:solo"
+  export const BOOT: State = "boot"
+  export const CHOPPER_PAIR: State = "chopper:pair"
+  export const CHOPPER_PAIR_SOUNDS: State = "chopper:pair:s"
 }

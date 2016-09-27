@@ -2,7 +2,7 @@
 /// <reference path="./Const.ts"/>
 /// <reference path="./Base.ts"/>
 
-class ChopperPair extends BaseState {
+class ChopperPairSounds extends BaseState {
     ichigo: Phaser.Sprite;
     akari: Phaser.Sprite;
     currentChopper: Phaser.Sprite;
@@ -12,12 +12,15 @@ class ChopperPair extends BaseState {
     count: number = 0;
     counter: Phaser.BitmapText;
     chopSound: Phaser.Sound;
-
+    chopSound_1: Phaser.Sound;
+    chopSound_2: Phaser.Sound;
     public init(count: number) {
         this.count = count;
     }
     public preload() {
         super.preload();
+        this.game.load.audio(SoundName.CHOP_1, "assets/sounds/vipsz3_snd7218.wav");
+        this.game.load.audio(SoundName.CHOP_2, "assets/sounds/vipsz3_snd7211.wav");
     }
 
     public getPaddingCount(): string {
@@ -41,6 +44,8 @@ class ChopperPair extends BaseState {
 
     public create() {
         this.chopSound = this.game.add.audio(SoundName.CHOP, 0.25, false);
+        this.chopSound_1 = this.game.add.audio(SoundName.CHOP_1, 0.9, false);
+        this.chopSound_2 = this.game.add.audio(SoundName.CHOP_2, 0.6, false);
 
         var bg = this.game.add.image(0, 0, ImageName.BG_FOREST);
         bg.inputEnabled = true;
@@ -80,9 +85,11 @@ class ChopperPair extends BaseState {
             }
             if (p.game.input.activePointer.leftButton.isDown) {
                 this.ichigo.animations.play(AnimationsName.CHOP);
+                this.chopSound_2.play();
                 this.currentChopper = this.ichigo;
             } else if (p.game.input.activePointer.rightButton.isDown) {
                 this.akari.animations.play(AnimationsName.CHOP);
+                this.chopSound_1.play();
                 this.currentChopper = this.akari;
             }
             this.count++;
@@ -90,7 +97,7 @@ class ChopperPair extends BaseState {
             if (this.LOG.animations.currentAnim.isPlaying) {
                 this.LOG.animations.currentAnim.complete();
             }
-            this.chopSound.play();
+            // this.chopSound.play();
             this.LOG.play(AnimationsName.BROKEN);
         });
         this.ichigo.animations.play(AnimationsName.STANDBY);
@@ -101,10 +108,10 @@ class ChopperPair extends BaseState {
         this.LOG = this.createLOG();
         super.create();
         this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT).onDown.addOnce(() => {
-            this.game.state.start(State.CHOPPER, true, false, this.count);
+            this.game.state.start(State.CHOPPER_PAIR, true, false, this.count);
         });
         this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT).onDown.addOnce(() => {
-            this.game.state.start(State.CHOPPER_PAIR_SOUNDS, true, false, this.count);
+            this.game.state.start(State.CHOPPER, true, false, this.count);
         });
     }
 }
